@@ -8,9 +8,16 @@ def connect_to_db():
 
     USERNAME = urllib.parse.quote_plus(base64.b64decode("cG9uemlvMzE=").decode("utf-8"))
     PASSWORD = urllib.parse.quote_plus(base64.b64decode("bjdnUXoyQEY4WHpoTWtB").decode("utf-8"))
-    DB_URI = f"mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.iczfviz.mongodb.net/?retryWrites=true&w=majority"
+    DB_URI = f"mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.ebshqnh.mongodb.net/?retryWrites=true&w=majority"
 
-    connect(db="to_do_list", host=DB_URI)
+    connection_settings = {
+        "connectTimeoutMS":30000,
+        "socketTimeoutMS":None, 
+        "connect":False, 
+        "maxPoolsize":1
+    }
+
+    connect(db="to_do_list", host=DB_URI,**connection_settings)
     #* Local: connect(db="to_do_list")
 
 def get_user(user):
