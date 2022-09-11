@@ -1,9 +1,17 @@
 from mongoengine import connect
 from .models import UserDocModel
 from werkzeug.security import check_password_hash
+import urllib
+import base64
 
 def connect_to_db():
-    connect(db="to_do_list")
+
+    USERNAME = urllib.parse.quote_plus(base64.b64decode("cG9uemlvMzE=").decode("utf-8"))
+    PASSWORD = urllib.parse.quote_plus(base64.b64decode("bjdnUXoyQEY4WHpoTWtB").decode("utf-8"))
+    DB_URI = f"mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.iczfviz.mongodb.net/?retryWrites=true&w=majority"
+
+    connect(db="to_do_list", host=DB_URI)
+    #* Local: connect(db="to_do_list")
 
 def get_user(user):
     user = UserDocModel.objects( __raw__ = {"user_id" : user})
