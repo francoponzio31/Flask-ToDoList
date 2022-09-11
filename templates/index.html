@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title  %}
+    {{ super() }}
+    Index
+{% endblock %}
+
+{% block navbar_buttons %}
+    <li class="active"><a href="{{ url_for('index') }}">Inicio</a></li> 
+    <li><a href= "{{ url_for('todo.todo_list') }}" >Tareas</a></li>
+    <li><a href="{{ url_for('auth.logout') }}">Cerrar sesión</a></li> 
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="user-welcome-form">
+        <div class="list-group-item" style="border-radius: 20px; padding: 50px 60px; text-align: justify;">
+            <h1 style="font-size: 40px;">Bienvenido, {{ username.capitalize() }}!</h1>
+            <p><a class="btn btn-primary btn-lg" href="{{ url_for('todo.todo_list') }}" role="button"> Ver To Do List</a></p>
+        </div>
+    </div>
+</div>
+        
+{% endblock %}
