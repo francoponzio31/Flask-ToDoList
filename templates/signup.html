@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title  %}
+    {{ super() }}
+    Sign Up
+{% endblock %}
+
+{% block navbar_buttons %}
+    <li class="active"><a href="{{ url_for('auth.signup') }}">Registrarse</a></li> 
+    <li><a href= "{{ url_for('auth.login') }}" >Iniciar sesión</a></li>
+{% endblock %}
+
+
+{% block content %}
+    
+    <div class="container">
+        
+        <div class="user-auth-form">
+            <h3 style="font-size: 35px;"> Registrate: </h3>
+            <div class="list-group-item" style="border-radius: 10px; padding: 30px;">
+                {{ wtf.quick_form(signup_form) }}
+            </div>
+        </div>
+            
+    </div>
+
+{% endblock %}

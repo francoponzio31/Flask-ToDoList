@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title  %}
+    {{ super() }}
+    To Do List
+{% endblock %}
+
+{% block navbar_buttons %}
+    <li><a href="{{ url_for('index') }}">Inicio</a></li> 
+    <li class="active"><a href= "{{ url_for('todo.todo_list') }}" >Tareas</a></li>
+    <li><a href="{{ url_for('auth.logout') }}">Cerrar sesión</a></li> 
+{% endblock %}
+
+{% block content %}
+    
+    <div class="container">
+        
+        <section class="add-task-form">
+            <h3> Agregar una nueva tarea: </h3>
+            <div class="list-group-item" style="border-radius: 15px;">
+                {{ wtf.quick_form(add_todo_form) }}
+            </div>
+        </section>
+        
+        {% if to_do_list %}
+            <section class="list-group tasks">
+                <h3> Tareas: </h3>
+                {% for todo in to_do_list %}
+                    <li class="list-group-item" style="border-radius: 15px;">
+                        
+                        {% if todo.to_dict().done %}
+                            <span class="badge" style="background-color: #32a72e;"> Done </span>
+                        {% else %}
+                            <span class="badge" style="background-color: #b80d0d;"> To do </span>
+                        {% endif %}
+
+                        <form class="edit-todo-form" method="POST" action='{{ url_for("todo.edit_todo", todo_id=todo.id, done=todo.to_dict().done) }}'>
+                            {{ todo_options_form.description(id="todo-description", class="todo-description", value = todo.to_dict().description, readonly = True) }}                        
+                            {{ todo_options_form.delete(class="btn btn-default") }}
+                            {{ todo_options_form.update(class="btn btn-default") }}
+                            {{ todo_options_form.edit(type="button", class="btn btn-default") }}
+                            {{ todo_options_form.save(class="btn btn-default") }}       
+                        </form>
+                   
+                    </li>
+                {% endfor %}
+            </section>
+        {% endif %}
+        
+    </div>
+
+{% endblock %}
+    
+{% block scripts %}
+    {{ super() }}
+    <script src="{{url_for('static', filename='js/todo_list.js')}}"></script>
+{% endblock %}
