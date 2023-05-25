@@ -1,2 +1,3 @@
 # Flask-ToDoList
-Flask To Do List
+
+My first web application, developed with Flask, HTML, CSS, JS and Bootstrap.
