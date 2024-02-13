@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+  
+  mongo:
+    image: mongo
+    volumes:
+      - mongodb-data:/data/db
+    expose:
+      - 27017
+
+volumes:
+  mongodb-data:

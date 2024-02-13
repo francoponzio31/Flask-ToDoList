@@ -1,14 +1,11 @@
 from mongoengine import connect
 from .models import UserDocModel
 from werkzeug.security import check_password_hash
-import urllib
-import base64
+
 
 def connect_to_db():
 
-    USERNAME = urllib.parse.quote_plus(base64.b64decode("cG9uemlvMzE=").decode("utf-8"))
-    PASSWORD = urllib.parse.quote_plus(base64.b64decode("bjdnUXoyQEY4WHpoTWtB").decode("utf-8"))
-    DB_URI = f"mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.ebshqnh.mongodb.net/?retryWrites=true&w=majority"
+    DB_URI = "mongodb://mongo:27017"
 
     connection_settings = {
         "connectTimeoutMS":30000,
